@@ -19,7 +19,7 @@ export def main [
   let raw = ($in | str join "\n") | bash-env-json ...($fn_args ++ $path_args) | complete
   let raw_json = $raw.stdout | from json
 
-  let error = $raw_json | get -i error
+  let error = $raw_json | get -o error
   if $error != null {
     error make { msg: $error }
   } else if $raw.exit_code != 0 {
